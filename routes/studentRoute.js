@@ -1,12 +1,16 @@
-const Student = require('../models/fetch-models');
+const express = require('express')
+const app = express()
+const Student = require('../models/fetch-model');
 
-router.get('/student', function (req, res) {
-    let Students = Student.find({}, function(err, res){
+app.get('/fetch-student', function (req, res) {
+    let Students = Student.find({}, function(err, response){
         if(err){
             console.log(err);
         }
         else {
-            res.json(res);
+            res.json(response);
         }
     });
 });
+
+module.exports = app;

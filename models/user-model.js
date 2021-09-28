@@ -2,6 +2,7 @@ let mongoose=require('mongoose');
 let db = require('../database');
 
 // create an schema
+
 let loginSchema =  mongoose.Schema({
             username: String,
             password:String,
@@ -9,3 +10,4 @@ let loginSchema =  mongoose.Schema({
         });
         loginTable=mongoose.model('useraccounts',loginSchema);
 let User= module.exports= loginTable;
+

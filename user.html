@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Attendance System</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+</head>
+
+<body>
+  
+    <div class="wrapper">
+        <div class="header-area">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">Attendance System</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="d-flex">
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/user.html">Student Details</a>
+                      </li>
+                      <li class="nav-item ">
+                        <a class="nav-link active" href="#">Attendance Details</a>
+                      </li>
+                      
+                      <li class="nav-item">
+                        <a class="nav-link active" href="#" tabindex="-1" aria-disabled="true">Attendance Percentage Calculation</a>
+                      </li>
+                      <li class="nav-item">
+                        <!-- <a class="nav-link active" href="#" tabindex="-1" aria-disabled="true" onclick="logout()">Logout</a> -->
+                        <input type="button" lable="logout" id="logout" onclick="logout()" Value="Logout">
+                      </li>
+                    </ul>
+                    
+                  </div>
+                </div>
+                </div>
+              </nav>
+        </div>
+<h1> Student Details</h1>
+        <table class="table table-hover">
+            
+                <thead>
+                  <tr>
+                    <th scope="col">S.NO</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Unique Id</th>
+                    <th scope="col">Department</th>
+                  </tr>
+                </thead>
+                <tbody id="s_data">
+                 
+                </tbody>
+          </table>
+    </div>
+    <script>
+      function fetchStudentData(){
+        return fetch('http://localhost:3000/fetch-student')
+          .then(response => response.json())
+          .then(data =>{ return data });
+
+      }
+      async function loadData(){
+        let data = await fetchStudentData();
+        let s_data = document.getElementById('s_data');
+        console.log(data);
+        console.log(s_data)
+        data.map((item,index)=>{
+          let row1= document.createElement("tr");
+        let td1= document.createElement("td");
+         td1.innerHTML=index+1;
+         let td2= document.createElement("td");
+         td2.innerHTML=item.name
+         let td3= document.createElement("td");
+         td3.innerHTML=item.unique_id;
+         let td4= document.createElement("td");
+         td4.innerHTML=item.department;
+         row1.appendChild(td1);
+         row1.appendChild(td2);
+         row1.appendChild(td3);
+         row1.appendChild(td4);
+         s_data.appendChild(row1);
+
+        })
+      }
+      
+      loadData();
+
+      function logout() {
+        var cnfrm=confirm("Do you really want to logout?");
+        if(cnfrm){
+          window.location.href="/index.html";
+        }
+      }
+      </script>
+</body>
+</html>

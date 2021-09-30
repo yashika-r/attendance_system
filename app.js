@@ -5,6 +5,7 @@ const cors = require('cors')
 const port = 3000
 const studentRoute = require("./routes/studentRoute");
 const userRoute = require("./routes/userRoute");
+const attendanceRoute = require("./routes/attendanceRoute");
 
 // We are using our packages here
 app.use(bodyParser.json() );       // to support JSON-encoded bodies
@@ -15,6 +16,7 @@ app.use(cors())
 
 app.use("/", studentRoute);
 app.use("/", userRoute);
+app.use("/", attendanceRoute);
 
 
 //Start your server on a specified port

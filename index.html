@@ -142,6 +142,7 @@ span.psw {
           if (data.status=="success")
           {
             sessionStorage.setItem("loginStatus", true);
+            sessionStorage.setItem("userId", data.unique_id);
             setTimeout(()=>{
               window.location.href="/user.html"
             }, 2000)
@@ -149,7 +150,7 @@ span.psw {
           else{
             sessionStorage.setItem("loginStatus", false);
             let error_msg = document.getElementById("msg")
-            error_msg.innerHtml="Invalid Username or Password";
+            // error_msg.innerHtml="Invalid Username or Password";
             alert("Invalid Username or Password");
           }
         })
